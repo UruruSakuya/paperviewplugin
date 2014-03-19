@@ -1,0 +1,27 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2014/03/19, 22:22:58
+    Author     : ururusakuya
+*/
+* {
+    font-family: 'Lucida Grande','Hiragino Kaku Gothic ProN',Meiryo, sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+html, body {
+    height : 100%;
+}
+.slide {
+    margin : 10px;
+    border : 2px solid #D399A2;
+    border-radius : 5px; 
+    height : 90%; 
+}
+
+.nonActive {
+    display : none;    
+}
