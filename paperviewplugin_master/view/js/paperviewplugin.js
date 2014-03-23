@@ -9,7 +9,8 @@ function slide(event) {
 
     // 右カーソルキー
     if (event.keyCode === 39) {
-        if (slideDocument.length - 1 <= countOfSlide) {
+        if (slideDocument.length <= countOfSlide &&
+                slideDocument[countOfSlide]["sentences"].length <= countOfSentence) {
             return;
         }
         moveNextDocument();
@@ -17,9 +18,13 @@ function slide(event) {
 }
 
 function moveNextDocument() {
-    if (slideDocument[countOfSlide]["sentences"].length > countOfSentence) {
+    if (slideDocument[countOfSlide]["sentences"].length !== 0 &&
+            countOfSentence === 0) {
         slideDocument[countOfSlide]["sentences"][countOfSentence].classList.remove("nonActive");
+    } else if (slideDocument[countOfSlide]["sentences"].length > countOfSentence) {
         countOfSentence++;
+        slideDocument[countOfSlide]["sentences"][countOfSentence].classList.remove("nonActive");
+
     } else {
         slideDocument[countOfSlide]["slide"].classList.add("nonActive");
         countOfSlide++;
@@ -30,9 +35,12 @@ function moveNextDocument() {
 }
 
 function movePreviousDocument() {
-    if (slideDocument[countOfSlide]["sentences"].length > countOfSentence) {
-        slideDocument[countOfSlide]["sentences"][countOfSentence].classList.remove("nonActive");
+    if (slideDocument[countOfSlide]["sentences"].length !== 0 &&
+            slideDocument[countOfSlide]["sentences"].length - 1 === countOfSentence) {
+        slideDocument[countOfSlide]["sentences"][countOfSentence].classList.add("nonActive");
+    } else if (countOfSentence !== 0) {
         countOfSentence--;
+        slideDocument[countOfSlide]["sentences"][countOfSentence].classList.add("nonActive");
     } else {
         slideDocument[countOfSlide]["slide"].classList.add("nonActive");
         countOfSlide--;
