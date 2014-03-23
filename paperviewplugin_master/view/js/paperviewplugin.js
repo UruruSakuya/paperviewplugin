@@ -1,67 +1,66 @@
 function slide(event) {
     // 左カーソルキー
     if (event.keyCode === 37) {
-        if (1 > countOfSlide) {
+        if (1 > slideDocument.currentPage - 1) {
             return;
         }
-        movePreviousDocument();
+        slideDocument.disActivate();
+        slideDocument.currentPage--;
+        slideDocument.activate();
     }
 
     // 右カーソルキー
     if (event.keyCode === 39) {
-        if (slideDocument.length <= countOfSlide &&
-                slideDocument[countOfSlide]["sentences"].length <= countOfSentence) {
+        if (slideDocument.length <= slideDocument.currentPage) {
             return;
         }
-        moveNextDocument();
-    }
-}
-
-function moveNextDocument() {
-    if (slideDocument[countOfSlide]["sentences"].length !== 0 &&
-            countOfSentence === 0) {
-        slideDocument[countOfSlide]["sentences"][countOfSentence].classList.remove("nonActive");
-    } else if (slideDocument[countOfSlide]["sentences"].length > countOfSentence) {
-        countOfSentence++;
-        slideDocument[countOfSlide]["sentences"][countOfSentence].classList.remove("nonActive");
-
-    } else {
-        slideDocument[countOfSlide]["slide"].classList.add("nonActive");
-        countOfSlide++;
-        countOfSentence = 0;
-        slideDocument[countOfSlide]["slide"].classList.remove("nonActive");
-    }
-
-}
-
-function movePreviousDocument() {
-    if (slideDocument[countOfSlide]["sentences"].length !== 0 &&
-            slideDocument[countOfSlide]["sentences"].length - 1 === countOfSentence) {
-        slideDocument[countOfSlide]["sentences"][countOfSentence].classList.add("nonActive");
-    } else if (countOfSentence !== 0) {
-        countOfSentence--;
-        slideDocument[countOfSlide]["sentences"][countOfSentence].classList.add("nonActive");
-    } else {
-        slideDocument[countOfSlide]["slide"].classList.add("nonActive");
-        countOfSlide--;
-        countOfSentence = 0;
-        slideDocument[countOfSlide]["slide"].classList.remove("nonActive");
+        slideDocument.disActivate();
+        slideDocument.currentPage++;
+        slideDocument.activate();
     }
 }
 
 function createPaperView() {
-    countOfSlide = 0;
-    countOfSentence = 0;
-
     var slideElements = document.getElementsByClassName("slide");
     slideDocument = [];
+    slideDocument.currentPage = 1;
+    slideDocument.nothingSentence; // undefined
     document.onkeyup = slide;
+
+    var documentCount = 0;
     for (var i = 0; i < slideElements.length; i++) {
-        slideDocument[i] = {
+        slideDocument[documentCount] = {
             "slide": slideElements[i],
-            "sentences": slideElements[i].getElementsByClassName("sentence")
+            "sentence": slideDocument.nothingSentence
         };
+
+        documentCount++;
+        var sentencesElements = slideElements[i].getElementsByClassName("sentence")
+        if (sentencesElements !== 0) {
+            for (var j = 0; j < sentencesElements.length; j++) {
+                slideDocument[documentCount] = {
+                    "slide": slideElements[i],
+                    "sentence": sentencesElements[j]
+                };
+
+                documentCount++;
+            }
+        }
     }
 
-    slideDocument[countOfSlide]["slide"].classList.remove("nonActive");
+    slideDocument.activate = function() {
+        this[this.currentPage - 1]["slide"].classList.remove("passive");
+        if (this[this.currentPage - 1]["sentence"] !== this.nothingSentence) {
+            this[this.currentPage - 1]["sentence"].classList.remove("passive");
+        }
+    };
+
+    slideDocument.disActivate = function() {
+        this[this.currentPage - 1]["slide"].classList.add("passive");
+        if (this[this.currentPage - 1]["sentence"] !== this.nothingSentence) {
+            this[this.currentPage - 1]["sentence"].classList.add("passive");
+        }
+    };
+
+    slideDocument.activate();
 }
