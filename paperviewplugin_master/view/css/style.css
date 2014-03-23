@@ -12,9 +12,19 @@ and open the template in the editor.
     margin: 0px;
     padding: 0px;
 }
+
 html, body {
     height : 100%;
 }
+
+ol {
+    list-style-type : none;
+}
+
+.sentence {
+    margin-left : 2%;
+}
+
 .slide {
     margin : 10px;
     border : 2px solid #D399A2;

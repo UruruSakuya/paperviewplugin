@@ -1,36 +1,59 @@
-var slideNumber;
-var slideElements;
-
 function slide(event) {
     // 左カーソルキー
     if (event.keyCode === 37) {
-        if (1 > slideNumber) {
+        if (1 > countOfSlide) {
             return;
         }
-        
-        slideElements[slideNumber].classList.add("nonActive");
-        slideNumber--;
-        slideElements[slideNumber].classList.remove("nonActive");
-        alert(slideNumber);
+        movePreviousDocument();
     }
-    
+
     // 右カーソルキー
     if (event.keyCode === 39) {
-        if (slideElements.length - 1 <= slideNumber) {
+        if (slideDocument.length - 1 <= countOfSlide) {
             return;
         }
-        
-        slideElements[slideNumber].classList.add("nonActive");
-        slideNumber++;
-        slideElements[slideNumber].classList.remove("nonActive");
-        alert(slideNumber);
+        moveNextDocument();
+    }
+}
+
+function moveNextDocument() {
+    if (slideDocument[countOfSlide]["sentences"].length > countOfSentence) {
+        slideDocument[countOfSlide]["sentences"][countOfSentence].classList.remove("nonActive");
+        countOfSentence++;
+    } else {
+        slideDocument[countOfSlide]["slide"].classList.add("nonActive");
+        countOfSlide++;
+        countOfSentence = 0;
+        slideDocument[countOfSlide]["slide"].classList.remove("nonActive");
+    }
+
+}
+
+function movePreviousDocument() {
+    if (slideDocument[countOfSlide]["sentences"].length > countOfSentence) {
+        slideDocument[countOfSlide]["sentences"][countOfSentence].classList.remove("nonActive");
+        countOfSentence--;
+    } else {
+        slideDocument[countOfSlide]["slide"].classList.add("nonActive");
+        countOfSlide--;
+        countOfSentence = 0;
+        slideDocument[countOfSlide]["slide"].classList.remove("nonActive");
     }
 }
 
 function createPaperView() {
-    slideNumber = 0;
-    document.onkeyup = slide;
-    slideElements = document.getElementsByClassName("slide");
-    slideElements[slideNumber].classList.remove("nonActive");
-}
+    countOfSlide = 0;
+    countOfSentence = 0;
 
+    var slideElements = document.getElementsByClassName("slide");
+    slideDocument = [];
+    document.onkeyup = slide;
+    for (var i = 0; i < slideElements.length; i++) {
+        slideDocument[i] = {
+            "slide": slideElements[i],
+            "sentences": slideElements[i].getElementsByClassName("sentence")
+        };
+    }
+
+    slideDocument[countOfSlide]["slide"].classList.remove("nonActive");
+}
