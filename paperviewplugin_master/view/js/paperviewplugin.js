@@ -31,7 +31,6 @@ function createPaperView() {
     slideElements = document.getElementsByClassName("slide");
     slideElements.currentSlide = 0;
     slideElements.currentSentence = 0;
-    document.onkeyup = slide;
 
     for (var i = 0; i < slideElements.length; i++) {
         slideElements[i].sentences = slideElements[i].getElementsByClassName("sentence");
@@ -71,5 +70,6 @@ function createPaperView() {
         this[this.currentSlide].classList.remove("passive");
     };
     
+    document.onkeyup = slide;
     slideElements.init();
 }
