@@ -1,15 +1,8 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 2014/03/19, 22:22:58
-    Author     : ururusakuya
-*/
 * {
     font-family: 'Lucida Grande','Hiragino Kaku Gothic ProN',Meiryo, sans-serif;
-    margin: 0px;
+    font-size : 100%;
+    font-weight : normal; 
+    margin : 0px;
     padding: 0px;
 }
 
@@ -17,21 +10,55 @@ html, body {
     height : 100%;
 }
 
+h1, h2, h3 {
+    margin : 1% auto;
+    text-align : center;
+}
+
+h1 {
+    font-size : 200%;
+}
+
+h2 {
+    font-size : 160%;
+}
+
+h3 {
+    font-size : 140%;
+}
+
 ol {
+}
+
+li.sentence {
+    margin : 0 1% 0 2%;
+    font-size : 120%;
     list-style-type : none;
 }
 
 .sentence {
-    margin-left : 2%;
+    
 }
 
 .slide {
-    margin : 10px;
+    margin : 1%;
     border : 2px solid #D399A2;
-    border-radius : 5px; 
+    border-radius : 1%;
     height : 90%; 
 }
 
 .passive {
     display : none;    
+}
+
+#title {
+    text-align : center;
+    margin : 18% auto 0 auto;
+    font-size : 250%;
+}
+
+#author {
+    text-align : center;
+    margin : 1% auto;
+    font-size : 200%;
 }
