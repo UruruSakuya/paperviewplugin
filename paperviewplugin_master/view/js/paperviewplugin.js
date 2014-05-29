@@ -33,41 +33,41 @@ function createPaperView() {
     slideElements.currentSentence = 0;
 
     for (var i = 0; i < slideElements.length; i++) {
-        slideElements[i].sentences = slideElements[i].getElementsByClassName("sentence");
+        slideElements[i].sentences = slideElements[i].getElementsByClassName = slideElements[i].sentences = slideElements[i].getElementsByClassName("sentence");
     }
 
     slideElements.increaseSlide = function() {
-        this[this.currentSlide].classList.add("passive");
+        this[this.currentSlide].className = this[this.currentSlide].className.replace("(.*)", "$& passive");
         this.currentSlide++;
-        this[this.currentSlide].classList.remove("passive");
+        this[this.currentSlide].className = this[this.currentSlide].className.replace("passive", "");
         this.currentSentence = 0;
         if (this[this.currentSlide].sentences.length !== this.currentSentence) {
-            this[this.currentSlide].sentences[this.currentSentence].classList.remove("passive");
+            this[this.currentSlide].sentences[this.currentSentence].className = this[this.currentSlide].sentences[this.currentSentence].className.replace("passive", "");
         }
     };
 
     slideElements.decreaseSlide = function() {
-        this[this.currentSlide].classList.add("passive");
+        this[this.currentSlide].className = this[this.currentSlide].className.replace("(.*)", "$& passive");
         this.currentSlide--;
-        this[this.currentSlide].classList.remove("passive");
+        this[this.currentSlide].className = this[this.currentSlide].className.replace("passive", "");
         this.currentSentence = 0;
         if (this[this.currentSlide].sentences.length !== this.currentSentence) {
-            this[this.currentSlide].sentences[this.currentSentence].classList.remove("passive");
+            this[this.currentSlide].sentences[this.currentSentence].className = this[this.currentSlide].sentences[this.currentSentence].className.replace("passive", "");
         }
     };
 
     slideElements.increaseSentence = function() {
         this.currentSentence++;
-        this[this.currentSlide].sentences[this.currentSentence].classList.remove("passive");
+        this[this.currentSlide].sentences[this.currentSentence].className = this[this.currentSlide].sentences[this.currentSentence].className.replace("passive", "");
     };
 
     slideElements.decreaseSentence = function() {
-        this[this.currentSlide].sentences[this.currentSentence].classList.add("passive");
+        this[this.currentSlide].sentences[this.currentSentence].className = this[this.currentSlide].sentences[this.currentSentence].className.replace("(.*)", "$& passive");
         this.currentSentence--;
     };
 
     slideElements.init = function() {
-        this[this.currentSlide].classList.remove("passive");
+        this[this.currentSlide].className = this[this.currentSlide].className.replace("\s", "");
     };
     
     document.onkeyup = slide;
